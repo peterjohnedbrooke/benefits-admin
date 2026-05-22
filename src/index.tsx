@@ -4,12 +4,17 @@
   import { store } from "./store/store";
   import App from "./App";
   import "./styles/global.css";
-  
+
+  document.documentElement.lang = "en-GB";
+
   async function enableMocking() {
-    if (!import.meta.env.DEV) return;
+    if ((import.meta.env.MODE as string) === "test") return;
     const { worker } = await import("./mocks/browser");
     await worker.start({
       onUnhandledRequest: "bypass",
+      serviceWorker: {
+        url: `${import.meta.env.BASE_URL ?? "/"}mockServiceWorker.js`,
+      },
     });
   }
   

@@ -1,7 +1,7 @@
 import type { Enrolment, EnrolmentStatus } from '@/lib/types';
 import { enrolments as seedEnrolments } from '@/mocks/data/enrolments';
 
-export const INJECT_FAILURES = true;
+export const INJECT_FAILURES = false;
 
 let enrolmentsState: Enrolment[] = seedEnrolments.map((e) => ({ ...e }));
 

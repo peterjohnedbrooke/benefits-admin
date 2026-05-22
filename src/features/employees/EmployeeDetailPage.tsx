@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { usePageTitle } from '@/lib/usePageTitle';
 import { employeesActions } from '@/store/employees/slice';
 import {
     selectAllEmployees,
@@ -31,6 +32,8 @@ const EmployeeDetailPage = () => {
     const benefitsLoading = useAppSelector(selectBenefitsLoading);
 
     const enrolmentsLoading = useAppSelector(selectEnrolmentsLoading(employeeId));
+
+    usePageTitle(employee ? `${employee.firstName} ${employee.lastName}` : 'Employee');
 
     useEffect(() => {
         if (employeesLoading === 'idle' && allEmployees.length === 0) {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { usePageTitle } from '@/lib/usePageTitle';
 import { benefitsActions } from '@/store/benefits/slice';
 import {
     selectAllBenefits,
@@ -14,6 +15,7 @@ import { CategorySection } from './components/CategorySection';
 const CATEGORY_ORDER: BenefitCategory[] = ['Health', 'Finance', 'Tech', 'Lifestyle'];
 
 const BenefitsCataloguePage = () => {
+    usePageTitle('Benefits');
     const dispatch = useAppDispatch();
     const benefits = useAppSelector(selectAllBenefits);
     const loading = useAppSelector(selectBenefitsLoading);

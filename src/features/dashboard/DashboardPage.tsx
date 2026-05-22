@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { usePageTitle } from '@/lib/usePageTitle';
 import { dashboardActions } from '@/store/dashboard/slice';
 import {
     selectDashboardStats,
@@ -18,6 +19,7 @@ const gbp = new Intl.NumberFormat('en-GB', {
 });
 
 const DashboardPage = () => {
+    usePageTitle('Dashboard');
     const dispatch = useAppDispatch();
     const stats = useAppSelector(selectDashboardStats);
     const loading = useAppSelector(selectDashboardLoading);

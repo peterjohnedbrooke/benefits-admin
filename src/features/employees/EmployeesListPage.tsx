@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { usePageTitle } from '@/lib/usePageTitle';
+import { useSlashFocus } from '@/lib/useSlashFocus';
 import { employeesActions } from '@/store/employees/slice';
 import {
     selectAllEmployees,
@@ -18,6 +20,8 @@ import { EmployeeTable } from './components/EmployeeTable';
 const ALL_DEPARTMENTS: Department[] = ['Engineering', 'People', 'Sales', 'Marketing'];
 
 const EmployeesListPage = () => {
+    usePageTitle('Employees');
+    const searchRef = useSlashFocus<HTMLInputElement>();
     const dispatch = useAppDispatch();
     const allEmployees = useAppSelector(selectAllEmployees);
     const loading = useAppSelector(selectEmployeesLoading);
@@ -72,8 +76,9 @@ const EmployeesListPage = () => {
             <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="sm:max-w-xs sm:flex-1">
                     <SearchInput
+                        ref={searchRef}
                         label="Search employees"
-                        placeholder="Search by name or email"
+                        placeholder="Search by name or email (press / to focus)"
                         value={q}
                         onChange={setQ}
                     />
